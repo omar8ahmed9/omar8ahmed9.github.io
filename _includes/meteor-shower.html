@@ -1,0 +1,401 @@
+<div class="sky-aurora" aria-hidden="true">
+  <span class="sky-aurora__blob sky-aurora__blob--1"></span>
+  <span class="sky-aurora__blob sky-aurora__blob--2"></span>
+  <span class="sky-aurora__blob sky-aurora__blob--3"></span>
+</div>
+
+<canvas class="meteor-shower" aria-hidden="true"></canvas>
+
+<script>
+(function () {
+  var canvas = document.querySelector('.meteor-shower');
+  if (!canvas || !canvas.getContext) return;
+
+  var ctx = canvas.getContext('2d');
+  var reduceMotion = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Scientific Blue palette
+  var COLORS = {
+    navy: [25, 69, 105],
+    steel: [95, 132, 162],
+    muted: [145, 174, 196]
+  };
+
+  // Particle network
+  var LINK_DISTANCE = 120;
+  var MOUSE_RADIUS = 170;
+
+  // Signal propagation
+  var SIGNAL_DURATION = 1400;
+  var SIGNAL_STEP = 140;
+  var SIGNAL_HOPS = 4;
+
+  var width = 0;
+  var height = 0;
+  var dpr = 1;
+
+  var stars = [];
+  var visible = [];
+  var signals = [];
+
+  var mouse = {
+    x: -9999,
+    y: -9999,
+    active: false
+  };
+
+  var scrollY = window.scrollY || 0;
+  var rafId = null;
+
+  function rand(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+
+  function rgba(c, a) {
+    return 'rgba(' +
+      c[0] + ', ' +
+      c[1] + ', ' +
+      c[2] + ', ' +
+      Math.max(0, a).toFixed(3) + ')';
+  }
+
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    width = window.innerWidth;
+    height = window.innerHeight;
+
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    var count = Math.min(
+      140,
+      Math.round(width * height / 11000)
+    );
+
+    stars = [];
+    signals = [];
+
+    for (var i = 0; i < count; i++) {
+      stars.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: rand(-0.12, 0.12),
+        vy: rand(-0.12, 0.12),
+        r: rand(0.6, 1.8),
+        depth: rand(0.2, 1),
+        phase: Math.random() * Math.PI * 2,
+        speed: rand(0.0008, 0.0025)
+      });
+    }
+  }
+
+  // -----------------------------------------------
+  // Original animated particle network
+  // -----------------------------------------------
+
+  function drawStars(t) {
+    var offset = scrollY * 0.15;
+    visible = [];
+
+    for (var i = 0; i < stars.length; i++) {
+      var s = stars[i];
+
+      s.x += s.vx;
+      s.y += s.vy;
+
+      if (s.x < -20) s.x = width + 20;
+      if (s.x > width + 20) s.x = -20;
+      if (s.y < -20) s.y = height + 20;
+      if (s.y > height + 20) s.y = -20;
+
+      var y = (
+        (s.y - offset * s.depth) % height + height
+      ) % height;
+
+      var x = s.x;
+
+      // Original mouse attraction
+      if (mouse.active) {
+        var dx = mouse.x - x;
+        var dy = mouse.y - y;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist > 0 && dist < MOUSE_RADIUS) {
+          var pull = (1 - dist / MOUSE_RADIUS) * 18;
+
+          x += dx / dist * pull;
+          y += dy / dist * pull;
+        }
+      }
+
+      visible.push({ x: x, y: y });
+
+      var twinkle =
+        0.5 + 0.5 * Math.sin(s.phase + t * s.speed);
+
+      ctx.fillStyle = rgba(
+        COLORS.navy,
+        0.2 + 0.4 * twinkle * s.depth
+      );
+
+      ctx.beginPath();
+      ctx.arc(
+        x, y,
+        s.r * (0.8 + 0.4 * twinkle),
+        0, Math.PI * 2
+      );
+      ctx.fill();
+    }
+
+    ctx.lineWidth = 0.8;
+
+    for (var a = 0; a < visible.length; a++) {
+      for (var b = a + 1; b < visible.length; b++) {
+        var dx = visible[a].x - visible[b].x;
+        var dy = visible[a].y - visible[b].y;
+        var distance = Math.hypot(dx, dy);
+
+        if (distance < LINK_DISTANCE) {
+          ctx.strokeStyle = rgba(
+            COLORS.steel,
+            0.14 * (1 - distance / LINK_DISTANCE)
+          );
+
+          ctx.beginPath();
+          ctx.moveTo(visible[a].x, visible[a].y);
+          ctx.lineTo(visible[b].x, visible[b].y);
+          ctx.stroke();
+        }
+      }
+
+      if (mouse.active) {
+        var mx = visible[a].x - mouse.x;
+        var my = visible[a].y - mouse.y;
+        var md = Math.hypot(mx, my);
+
+        if (md < MOUSE_RADIUS) {
+          ctx.strokeStyle = rgba(
+            COLORS.navy,
+            0.35 * (1 - md / MOUSE_RADIUS)
+          );
+
+          ctx.beginPath();
+          ctx.moveTo(visible[a].x, visible[a].y);
+          ctx.lineTo(mouse.x, mouse.y);
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  // -----------------------------------------------
+  // Network activation: graph propagation
+  // -----------------------------------------------
+
+  function activateNetwork(x, y) {
+    if (!visible.length) return;
+
+    // Find the particle nearest to the click
+    var nearest = 0;
+    var minDistance = Infinity;
+
+    for (var i = 0; i < visible.length; i++) {
+      var distance = Math.hypot(
+        visible[i].x - x,
+        visible[i].y - y
+      );
+
+      if (distance < minDistance) {
+        minDistance = distance;
+        nearest = i;
+      }
+    }
+
+    // Build a local graph using particle proximity.
+    // Breadth-first search determines signal arrival order.
+    var hops = new Array(visible.length).fill(-1);
+    var parents = new Array(visible.length).fill(-1);
+    var queue = [nearest];
+
+    hops[nearest] = 0;
+
+    for (var q = 0; q < queue.length; q++) {
+      var current = queue[q];
+
+      if (hops[current] >= SIGNAL_HOPS) continue;
+
+      for (var j = 0; j < visible.length; j++) {
+        if (hops[j] !== -1) continue;
+
+        var distance = Math.hypot(
+          visible[current].x - visible[j].x,
+          visible[current].y - visible[j].y
+        );
+
+        if (distance < LINK_DISTANCE) {
+          hops[j] = hops[current] + 1;
+          parents[j] = current;
+          queue.push(j);
+        }
+      }
+    }
+
+    signals.push({
+      start: performance.now(),
+      hops: hops,
+      parents: parents
+    });
+
+    // Limit simultaneous activations
+    if (signals.length > 3) signals.shift();
+  }
+
+  function drawSignals(t) {
+    for (var k = signals.length - 1; k >= 0; k--) {
+      var signal = signals[k];
+      var elapsed = t - signal.start;
+
+      if (elapsed >= SIGNAL_DURATION) {
+        signals.splice(k, 1);
+        continue;
+      }
+
+      for (var i = 0; i < signal.hops.length; i++) {
+        var hop = signal.hops[i];
+
+        if (hop < 0) continue;
+
+        var age = elapsed - hop * SIGNAL_STEP;
+
+        if (age < 0) continue;
+
+        // Smooth Gaussian activation
+        var center = 220;
+        var spread = 160;
+
+        var intensity = Math.exp(
+          -Math.pow((age - center) / spread, 2)
+        );
+
+        if (intensity < 0.01) continue;
+
+        var node = visible[i];
+        if (!node) continue;
+
+        var parent = signal.parents[i];
+
+        // Soft connection illumination
+        if (parent >= 0 && visible[parent]) {
+          ctx.beginPath();
+          ctx.moveTo(
+            visible[parent].x,
+            visible[parent].y
+          );
+          ctx.lineTo(node.x, node.y);
+
+          ctx.strokeStyle = rgba(
+            COLORS.steel,
+            0.20 * intensity
+          );
+
+          ctx.lineWidth = 1.0;
+          ctx.stroke();
+        }
+
+        // Subtle particle activation
+        ctx.beginPath();
+        ctx.arc(
+          node.x,
+          node.y,
+          1.5 + 1.5 * intensity,
+          0,
+          Math.PI * 2
+        );
+
+        ctx.fillStyle = rgba(
+          COLORS.steel,
+          0.30 * intensity
+        );
+
+        ctx.fill();
+      }
+    }
+  }
+
+  // -----------------------------------------------
+  // Animation loop
+  // -----------------------------------------------
+
+  function frame(t) {
+    ctx.clearRect(0, 0, width, height);
+
+    drawStars(t);
+    drawSignals(t);
+
+    rafId = requestAnimationFrame(frame);
+  }
+
+  function start() {
+    if (rafId === null) {
+      rafId = requestAnimationFrame(frame);
+    }
+  }
+
+  function stop() {
+    if (rafId !== null) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+  }
+
+  // -----------------------------------------------
+  // Initialization and interactions
+  // -----------------------------------------------
+
+  resize();
+
+  window.addEventListener('resize', resize);
+
+  if (reduceMotion) {
+    mouse.active = false;
+    drawStars(0);
+    return;
+  }
+
+  window.addEventListener('mousemove', function (e) {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+    mouse.active = true;
+  });
+
+  document.addEventListener('mouseleave', function () {
+    mouse.active = false;
+  });
+
+  window.addEventListener('scroll', function () {
+    scrollY = window.scrollY || 0;
+  }, { passive: true });
+
+  window.addEventListener('click', function (e) {
+    if (e.target.closest(
+      'a, button, input, textarea, select, img'
+    )) return;
+
+    activateNetwork(e.clientX, e.clientY);
+  });
+
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+      stop();
+    } else {
+      start();
+    }
+  });
+
+  start();
+
+})();
+</script>

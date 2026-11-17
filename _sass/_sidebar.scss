@@ -1,0 +1,466 @@
+/* ==========================================================================
+   SIDEBAR
+   ========================================================================== */
+
+
+/*
+   Default sidebar
+   ========================================================================== */
+
+.sidebar {
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+
+  @include clearfix();
+
+  margin-bottom: 1em;
+
+  @include breakpoint($large) {
+    @include span(3 of 12);
+
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  @include breakpoint($x-large) {
+    padding-right: 0;
+  }
+
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-bottom: 0;
+    font-family: $sans-serif-narrow;
+  }
+
+  h3,
+  h4 {
+    font-size: $type-size-6;
+  }
+
+  p,
+  li {
+    font-family: $sans-serif;
+    font-size: $type-size-6;
+    line-height: 1.5;
+  }
+
+  img {
+    width: 100%;
+  }
+}
+
+
+/*
+   Right sidebar
+   ========================================================================== */
+
+.sidebar__right {
+  margin-bottom: 1em;
+
+  @include breakpoint($large) {
+    position: relative;
+    float: right;
+    width: $right-sidebar-width-narrow;
+    margin-left: span(0.5 of 12);
+    z-index: 10;
+  }
+
+  @include breakpoint($x-large) {
+    width: $right-sidebar-width;
+  }
+}
+
+
+/*
+   Author profile
+   ========================================================================== */
+
+.profile_box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: flex-start;
+  align-items: center;
+
+  @include breakpoint($large) {
+    display: block;
+  }
+}
+
+
+/*
+   Profile photograph
+   ========================================================================== */
+
+.author__avatar {
+  display: table-cell;
+  vertical-align: top;
+  width: 75px;
+
+  @include breakpoint($large) {
+    display: block;
+    width: fit-content;
+    height: auto;
+    margin: 0 auto;
+    transform: translateX(-6px);
+  }
+
+  img {
+    max-width: 175px;
+    min-width: 75px;
+    border-radius: 50%;
+
+    @include breakpoint($large) {
+      padding: 2px;
+      border: 2px solid #C9DDEC;
+    }
+  }
+}
+
+
+/*
+   Name and academic position
+   ========================================================================== */
+
+.author__content {
+  display: table-cell;
+  vertical-align: top;
+  padding-left: 10px;
+  min-width: 120px;
+  line-height: 1;
+
+  @include breakpoint($large) {
+    display: block;
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.author__name {
+  margin: 0;
+
+  @include breakpoint($large) {
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+}
+
+.sidebar .author__name {
+  font-family: $sans-serif;
+  font-size: $type-size-4;
+  font-weight: 600;
+  line-height: 1.25;
+  color: #0B3046;
+
+  @include breakpoint($medium) {
+    font-size: $type-size-3;
+  }
+}
+
+.author__bio {
+  margin: 0;
+
+  @include breakpoint($large) {
+    margin-top: 5px;
+    margin-bottom: 20px;
+  }
+}
+
+
+/*
+   Sidebar information and social links
+   ========================================================================== */
+
+.author__urls-wrapper {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin-left: 0;
+  font-family: $sans-serif;
+  z-index: 10;
+
+  @include breakpoint($large) {
+    display: block;
+  }
+}
+
+
+/*
+   Vertical social links
+   ========================================================================== */
+
+.author__urls {
+  display: block;
+  position: relative;
+
+  margin: 0;
+  padding: 0;
+
+  list-style-type: none;
+
+  border: none;
+  border-radius: 0;
+
+  background: transparent;
+  box-shadow: none;
+
+  cursor: default;
+  
+  &::before,
+  &::after {
+    display: none;
+  }
+
+  li {
+    margin-bottom: 6px;
+    white-space: normal;
+  }
+
+  a {
+    display: block;
+    padding: 3px 0;
+
+    color: #494e52;
+    font-size: $type-size-6;
+    line-height: 1.5;
+    text-decoration: none;
+
+    transition: color 0.2s ease, transform 0.2s ease;
+
+    &:hover,
+    &:focus-visible {
+      color: #194569;
+      text-decoration: none;
+      transform: translateX(2px);
+    }
+  }
+
+  i {
+    display: inline-block;
+    width: 18px;
+    margin-right: 7px;
+
+    text-align: center;
+    vertical-align: baseline;
+    color: #494e52;
+
+    transform: none;
+  }
+
+  a:hover i,
+  a:focus-visible i {
+    color: #194569;
+  }
+}
+
+/* ResearchGate and ORCID brand icons */
+
+.author__urls .author__brand-icon {
+  display: inline-block;
+
+  width: 16px;
+  height: 16px;
+
+  margin: 0 9px 0 1px;
+  padding: 0;
+
+  object-fit: contain;
+  vertical-align: -3px;
+
+  border: none;
+  box-shadow: none;
+  transform: none;
+}
+
+/*
+   Research interests
+   ========================================================================== */
+
+.author__interests {
+  margin-bottom: 14px !important;
+
+  font-family: $sans-serif;
+  font-size: $type-size-6;
+
+  line-height: 1.6;
+
+  color: #494e52;
+
+  white-space: normal;
+}
+
+
+/*
+   Location
+   ========================================================================== */
+
+.author__location {
+  display: block;
+  margin-bottom: 12px !important;
+
+  color: #494e52;
+  font-size: $type-size-6;
+  line-height: 1.5;
+
+  i {
+    display: inline-block;
+    width: 18px;
+    margin-right: 7px;
+
+    text-align: center;
+    vertical-align: baseline;
+    color: #494e52;
+
+    transform: none;
+  }
+}
+
+/* =========================================================
+   SIDEBAR — LATEST NEWS PANEL
+   ========================================================= */
+
+.sidebar-news {
+  width: 100%;
+  margin-top: 24px;
+  padding: 14px;
+
+  background: transparent;
+  border: 1px solid #C9DDEC;
+  border-radius: 8px;
+
+  h4 {
+    margin: 0 0 14px;
+    font-family: $sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #0B3046;
+  }
+}
+
+/* Scrollable area */
+
+.sidebar-news-scroll {
+  max-height: 240px;
+  overflow-y: auto;
+  padding: 2px 8px 2px 6px;
+
+  scrollbar-width: thin;
+  scrollbar-color: #C9DDEC transparent;
+}
+
+/* Timeline entries */
+
+.sidebar-news-item {
+  position: relative;
+  margin-left: 5px;
+  padding: 0 0 14px 14px;
+
+  border-left: 1px solid #C9DDEC;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: -4px;
+
+    width: 7px;
+    height: 7px;
+
+    background: #5F84A2;
+    border-radius: 50%;
+  }
+
+  &:last-child {
+    border-left-color: transparent;
+    padding-bottom: 0;
+  }
+}
+
+/* Announcement text */
+
+.sidebar-news-title {
+  margin: 0 !important;
+
+  font-size: 0.76rem !important;
+  line-height: 1.5;
+
+  color: #494E52;
+}
+
+/* LinkedIn and paper icons */
+
+/* Date and icons on the same line */
+
+.sidebar-news-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 5px;
+}
+
+.sidebar-news-date {
+  display: block;
+  margin: 0;
+
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #5F84A2;
+}
+
+/* LinkedIn and paper icons */
+
+/* LinkedIn and paper icons */
+
+.sidebar-news-links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #5F84A2;
+    font-size: 0.85rem;
+    line-height: 1;
+
+    text-decoration: none;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+
+    transition: color 0.2s ease;
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: #194569;
+      text-decoration: none;
+      border: none;
+      box-shadow: none;
+      background: transparent;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline: 2px solid #5F84A2;
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+  }
+}

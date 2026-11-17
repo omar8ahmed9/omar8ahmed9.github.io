@@ -1,0 +1,39 @@
+# =========================================================
+# Publications
+# =========================================================
+
+- title: "Multimodal Optimal Transport for Training-free Temporal Segmentation in Surgical Robotics"
+  authors: "<strong>Omar Mohamed</strong>, Edoardo Fazzari, Ayah Al-Naji, Hamdan Alhadhrami, Khalfan Hableel, Saif Alkindi, Ivan Laptev, Cesare Stefanini"
+  venue: "IEEE Robotics and Automation Letters (RA-L)"
+  venue_short: "IEEE RA-L"
+  year: 2026
+  image: "/images/publications/tasot.png"
+  paper: "https://doi.org/10.1109/LRA.2026.3747405"
+  code: "https://github.com/omar8ahmed9/TASOT"
+
+
+- title: "Hybrid Offline–Online Reinforcement Learning for Sensorless, High-Precision Force Regulation in Surgical Robotic Grasping"
+  authors: "Edoardo Fazzari, <strong>Omar Mohamed</strong>, Khalfan Hableel, Hamdan Alhadhrami, Cesare Stefanini"
+  venue: "arXiv preprint"
+  venue_short: "arXiv"
+  year: 2026
+  image: "/images/publications/surgical_grasping.png"
+  paper: "https://arxiv.org/abs/2602.23870"
+
+
+- title: "ZTUNA Modular Bionic Fish Design and Manufacturing"
+  authors: "Mohamed Hamoud, Mohamed A. Elwahsh, Karim I. Nesma K. Shaaban, Mohamed M. Nooreldeen, Ahmed N. Donia, <strong>Omar Mohamed</strong>,  Hazem A. Sayed, Ahmed M. Hamza, Hany A. Elesawy, Irene S. Fahim, Ahmed G. Radwan"
+  venue: "Discover Mechanical Engineering"
+  venue_short: "Discover ME"
+  year: 2026
+  image: "/images/publications/ztuna.png"
+  paper: "https://doi.org/10.1007/s44245-025-00161-z"
+
+
+- title: "A Review of Various Buoyancy Control Mechanisms for Underwater Vehicles"
+  authors: "Karim I. Sadek, Mohamed A. Elwahsh, Nesma K. Shaaban, Mohamed M. NoorEldeen, Ahmed N. Donia, <strong>Omar A. Mohamed</strong>, Seif A. Alsayed, Hazem A. Sayed, Ahmed M. Hamza, Irene S. Fahim, Ahmed G. Radwan, M. Hamoud"
+  venue: "Advances in Science and Engineering Technology International Conferences (ASET)"
+  venue_short: "IEEE ASET"
+  year: 2025
+  image: "/images/publications/buoyancy_review.png"
+  paper: "https://doi.org/10.1109/ASET66891.2025.11427867"

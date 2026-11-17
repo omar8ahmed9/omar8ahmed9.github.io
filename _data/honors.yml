@@ -1,0 +1,157 @@
+# =========================================================
+# Honors and Awards
+# =========================================================
+
+scholarships:
+
+  - year: 2025
+    title: "Full MSc Scholarship"
+    organization: "Mohamed bin Zayed University of Artificial Intelligence (MBZUAI)"
+    location: "Abu Dhabi, UAE"
+    date: "Aug 2025 – Present"
+
+  - year: 2024
+    title: "Erasmus+ Mobility Scholarship"
+    organization: "Riga Technical University"
+    location: "Latvia"
+    date: "Jan – Jun 2024"
+
+  - year: 2020
+    title: "Full BSc Scholarship"
+    organization: "Banque Misr Foundation · Nile University"
+    location: "Giza, Egypt"
+    date: "Oct 2020 – Feb 2025"
+
+
+awards:
+
+  # ---------------------------------------------------------
+  # 2024
+  # ---------------------------------------------------------
+
+  - year: 2024
+    title: "Best Technical Solution Award"
+    organization: "RoboBattle48 Robotics Hackathon · Riga Technical University"
+    location: "Latvia"
+    role: "Participant"
+    date: "May 2024"
+
+  - year: 2024
+    title: "3rd Place — LifeHack Valmiera"
+    organization: "Urban Planning and Innovation Hackathon"
+    location: "Latvia"
+    role: "Participant"
+    date: "May 2024"
+
+
+  # ---------------------------------------------------------
+  # 2023
+  # ---------------------------------------------------------
+
+  - year: 2023
+    title: "2nd Place Worldwide — Influencer Award"
+    organization: "RoboCup Asia Pacific"
+    location: "South Korea"
+    role: "Mentor"
+    date: "Dec 2023"
+
+  - year: 2023
+    title: "1st Place — Alamein Robotics Championship"
+    organization: "SeaPerch North Africa Challenge"
+    location: "Egypt"
+    role: "Mentor"
+    date: "Oct 2023"
+
+  - year: 2023
+    title: "8th Place Worldwide"
+    organization: "International SeaPerch Challenge · Real World Innovation"
+    location: "USA"
+    role: "Mentor"
+    date: "May 2023"
+
+  - year: 2023
+    title: "1st Place — SeaPerch North Africa"
+    organization: "Qualified for the International SeaPerch Challenge"
+    location: "Egypt"
+    role: "Mentor"
+    date: "Mar 2023"
+
+  - year: 2023
+    title: "President's Honor Award"
+    organization: "Nile University · 4.0 GPA"
+    location: "Egypt"
+    role: "Student"
+    date: "2022–2023"
+
+
+  # ---------------------------------------------------------
+  # 2022
+  # ---------------------------------------------------------
+
+  - year: 2022
+    title: "3rd Place Worldwide"
+    organization: "International SeaPerch Challenge · Real World Innovation"
+    location: "USA"
+    role: "Mentor"
+    date: "Jun 2022"
+
+  - year: 2022
+    title: "Top 10 Worldwide Teams"
+    organization: "Ford Fund COVID-19 College Challenge · Enactus Global · USD 5,000 Grant"
+    location: "International"
+    role: "Project Manager"
+    date: "Mar 2022"
+
+  - year: 2022
+    title: "1st Place — SeaPerch North Africa"
+    organization: "Qualified for the International SeaPerch Challenge"
+    location: "Egypt"
+    role: "Mentor"
+    date: "Mar 2022"
+
+
+  # ---------------------------------------------------------
+  # 2019
+  # ---------------------------------------------------------
+
+  - year: 2019
+    title: "National Excellence in Education Award"
+    organization: "Best Secondary Student of 2019 · El-Kalla Foundation"
+    location: "Egypt"
+    role: "Student"
+    date: "Nov 2019"
+
+  - year: 2019
+    title: "First Prize — SUMO Adult Category"
+    organization: "Robot Challenge 2019"
+    location: "Beijing, China"
+    role: "Participant"
+    date: "Aug 2019"
+
+  - year: 2019
+    title: "Golden Prize"
+    organization: "International Invention Innovation Competition"
+    location: "Canada"
+    role: "Participant"
+    date: "Jul 2019"
+
+  - year: 2019
+    title: "Inspire Award"
+    organization: "VEX Robotics World Championship"
+    location: "Kentucky, USA"
+    role: "Participant"
+    date: "Apr 2019"
+
+  - year: 2019
+    title: "1st Place — VEX Egypt Robotics Competition"
+    organization: "Qualified for the VEX Robotics World Championship"
+    location: "Egypt"
+    role: "Participant"
+    date: "Mar 2019"
+
+  - year: 2019
+    title: "1st Place — Egypt Science & Engineering Fair"
+    organization: "CBIO Category"
+    location: "Egypt"
+    role: "Participant"
+    date: "Feb 2018 & 2019"

@@ -1,0 +1,875 @@
+---
+---
+
+/*
+ * Minimal Mistakes Jekyll Theme
+ * Michael Rose
+ * mademistakes.com
+ */
+
+@import "vendor/breakpoint/breakpoint";
+@import "variables";
+@import "mixins";
+@import "vendor/susy/susy";
+
+@import "reset";
+@import "base";
+
+@import "utilities";
+@import "animations";
+@import "tables";
+@import "buttons";
+@import "notices";
+@import "masthead";
+@import "navigation";
+@import "footer";
+@import "syntax";
+
+@import "forms";
+
+@import "page";
+@import "archive";
+@import "sidebar";
+
+@import "vendor/font-awesome/fontawesome";
+@import "vendor/font-awesome/solid";
+@import "vendor/font-awesome/brands";
+@import "vendor/magnific-popup/magnific-popup";
+@import "print";
+
+
+/* =========================================================
+   PUBLICATIONS
+   ========================================================= */
+
+.paper-box {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #efefef;
+  padding: 2em 0;
+
+  .paper-box-image {
+    justify-content: center;
+    display: flex;
+    width: 100%;
+    order: 2;
+
+    img {
+      max-width: 400px;
+      box-shadow: 3px 3px 6px #888;
+      object-fit: cover;
+    }
+  }
+
+  .paper-box-text {
+    max-width: 100%;
+    order: 1;
+  }
+
+  @include breakpoint($medium) {
+    .paper-box-image {
+      justify-content: left;
+      min-width: 200px;
+      max-width: 40%;
+      order: 1;
+    }
+
+    .paper-box-text {
+      justify-content: left;
+      padding-left: 2em;
+      max-width: 60%;
+      order: 2;
+    }
+  }
+}
+
+$scroll_offset: 2em;
+
+h1:before,
+.anchor:before {
+  content: '';
+  display: block;
+  position: relative;
+  width: 0;
+  height: $scroll_offset;
+  margin-top: -$scroll_offset;
+}
+
+.badge {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  position: absolute;
+  margin-top: 0.5em;
+  margin-left: -0.5em;
+  color: white;
+  background-color: #194569;
+  font-size: 0.8em;
+}
+
+
+/* =========================================================
+   SELECTED PROJECTS
+   ========================================================= */
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin: 1.5rem 0 2rem;
+}
+
+.project-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+  }
+
+  .project-content {
+    padding: 1rem;
+  }
+
+  h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.05rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+  }
+
+  .project-tags {
+    font-size: 0.75rem;
+    color: #64748b;
+    margin-bottom: 0.75rem;
+  }
+
+  .project-links {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* =========================================================
+   ANIMATED PARTICLE BACKGROUND
+   ========================================================= */
+
+.meteor-shower {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.sky-aurora {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.sky-aurora__blob {
+  position: absolute;
+  width: 46vmax;
+  height: 46vmax;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.22;
+  will-change: transform;
+}
+
+.sky-aurora__blob--1 {
+  top: -16vmax;
+  left: -10vmax;
+  background: radial-gradient(circle, #91AEC4 0%, transparent 70%);
+  animation: aurora-drift-1 26s ease-in-out infinite alternate;
+}
+
+.sky-aurora__blob--2 {
+  top: 20vh;
+  right: -18vmax;
+  background: radial-gradient(circle, #B7D0E1 0%, transparent 70%);
+  animation: aurora-drift-2 32s ease-in-out infinite alternate;
+}
+
+.sky-aurora__blob--3 {
+  bottom: -22vmax;
+  left: 25vw;
+  background: radial-gradient(circle, #DBECF4 0%, transparent 70%);
+  animation: aurora-drift-3 38s ease-in-out infinite alternate;
+}
+
+@keyframes aurora-drift-1 {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(18vw, 14vh) scale(1.2); }
+}
+
+@keyframes aurora-drift-2 {
+  from { transform: translate(0, 0) scale(1.1); }
+  to   { transform: translate(-20vw, 18vh) scale(0.9); }
+}
+
+@keyframes aurora-drift-3 {
+  from { transform: translate(0, 0) scale(0.95); }
+  to   { transform: translate(-14vw, -20vh) scale(1.15); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sky-aurora__blob {
+    animation: none;
+  }
+}
+
+
+/* =========================================================
+   SCIENTIFIC BLUE THEME
+   ========================================================= */
+
+a {
+  color: #194569;
+
+  &:hover {
+    color: #5F84A2;
+  }
+}
+
+.greedy-nav {
+  a {
+    color: #194569;
+
+    &:hover {
+      color: #5F84A2;
+    }
+  }
+}
+
+.masthead__menu-item {
+  a {
+    color: #194569;
+  }
+}
+
+
+/* =========================================================
+   EDUCATION — BORDERLESS ROWS
+   ========================================================= */
+
+.education-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+
+  margin: 12px 0 25px;
+}
+
+.education-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  padding: 4px 0;
+
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #f1f2f3;
+  border-radius: 0;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  img {
+    box-shadow: none !important;
+    transform: none !important;
+  }
+}
+
+.education-logo {
+  display: flex;
+  flex: 0 0 80px;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 55px;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    box-shadow: none;
+  }
+}
+
+.education-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.education-heading {
+  margin-bottom: 5px;
+
+  h3 {
+    margin: 0;
+    color: #0B3046;
+    font-size: 0.92rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+}
+
+.education-bottom {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.education-subtitle {
+  min-width: 0;
+  color: #494E52;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.education-date {
+  flex-shrink: 0;
+  color: #667680;
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+  .education-card {
+    gap: 12px;
+    padding: 8px 0;
+  }
+
+  .education-logo {
+    flex-basis: 60px;
+    width: 60px;
+    height: 50px;
+  }
+
+  .education-heading h3 {
+    font-size: 0.85rem;
+  }
+
+  .education-bottom {
+    flex-wrap: wrap;
+    gap: 4px 10px;
+  }
+
+  .education-date,
+  .education-subtitle {
+    font-size: 0.75rem;
+  }
+}
+
+/* =========================================================
+   PUBLICATIONS
+   ========================================================= */
+
+
+/*
+   Scrollable publications panel
+   ========================================================= */
+
+/* Publications outer panel */
+
+.publications-panel {
+  margin: 12px 0 24px;
+  padding: 16px 6px 16px 16px;
+
+  background: transparent;
+  border: 1px solid #C9DDEC;
+  border-radius: 8px;
+}
+
+/* Scrollable publications list */
+
+.publications-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  max-height: 486px;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+
+  padding-right: 8px;
+
+  scrollbar-width: thin;
+  scrollbar-color: #C9DDEC transparent;
+}
+
+
+/*
+   Publication entries
+   ========================================================= */
+
+.publication-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+
+  padding: 14px 2px 18px;
+
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #C9DDEC;
+  border-radius: 0;
+  box-shadow: none;
+
+  &:last-child {
+    border-bottom: none;
+    padding-bottom: 2px;
+  }
+}
+
+
+/*
+   Publication image
+   ========================================================= */
+
+/* Publication image */
+
+.publication-image {
+  position: relative;
+
+  flex: 0 0 28%;
+  max-width: 28%;
+  align-self: stretch;
+
+  min-height: 120px;
+
+  background: rgba(255, 255, 255, 0.35);
+  border: 1px solid #C9DDEC;
+  border-radius: 5px;
+
+  img {
+    position: absolute;
+    inset: 0;
+
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    border: none;
+    border-radius: 5px;
+    box-shadow: none;
+  }
+}
+
+/*
+   Venue badge
+   ========================================================= */
+
+.publication-venue-badge {
+  position: absolute;
+  top: 8px;
+  left: 0;
+
+  padding: 4px 9px;
+
+  background: rgba(11, 48, 70, 0.88);
+  color: #FFFFFF;
+
+  font-family: $sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0.01em;
+
+  border-radius: 0 4px 4px 0;
+
+  white-space: nowrap;
+}
+
+
+/*
+   Publication information
+   ========================================================= */
+
+.publication-content {
+  flex: 1;
+  min-width: 0;
+}
+/* Publication title */
+
+.publications-list .publication-title {
+  margin: 0 0 7px !important;
+
+  font-family: $sans-serif;
+  font-size: 1.05rem !important;
+  font-weight: 600;
+  line-height: 1.35;
+
+  a {
+    color: #0B3046;
+    font-size: inherit;
+    font-weight: inherit;
+    text-decoration: none;
+
+    &:hover {
+      color: #194569;
+      text-decoration: none;
+    }
+  }
+}
+
+/* Authors */
+
+.publications-list .publication-authors {
+  margin: 0 0 6px !important;
+
+  font-family: $sans-serif;
+  font-size: 0.90rem !important;
+  font-weight: 400;
+  line-height: 1.45;
+
+  color: #494E52;
+
+  strong {
+    font-weight: 600;
+  }
+}
+
+/* Venue */
+
+.publications-list .publication-venue {
+  margin: 0 0 11px !important;
+
+  font-family: $sans-serif;
+  font-size: 0.82rem !important;
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.4;
+
+  color: #5F84A2;
+}
+
+/* =========================================================
+   PUBLICATION RESOURCE BUTTONS
+   ========================================================= */
+
+.publication-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    min-height: 30px;
+    padding: 6px 12px;
+
+    font-family: $sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1;
+
+    color: #194569;
+    background: transparent;
+
+    border: 1px solid #C9DDEC;
+    border-radius: 5px;
+
+    text-decoration: none;
+    box-shadow: none;
+
+    transition:
+      color 0.2s ease,
+      border-color 0.2s ease,
+      background-color 0.2s ease;
+
+    /* Icon */
+
+    i {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      flex: 0 0 14px;
+      width: 14px;
+      height: 16px;
+
+      margin: 0 !important;
+      padding: 0;
+
+      font-size: 13px;
+      line-height: 1;
+      text-align: center;
+      color: inherit;
+
+      transform: translateY(-1px);
+    }
+
+    /* Button text */
+
+    span {
+      display: inline-flex;
+      align-items: center;
+
+      height: 16px;
+      margin: 0;
+      padding: 0;
+
+      font-size: inherit;
+      line-height: 16px;
+    }
+
+    &:hover {
+      color: #0B3046;
+      background: rgba(201, 221, 236, 0.25);
+      border-color: #5F84A2;
+
+      text-decoration: none;
+      box-shadow: none;
+    }
+
+    &:focus-visible {
+      outline: 2px solid #5F84A2;
+      outline-offset: 2px;
+    }
+  }
+}
+
+/*
+   Responsive layout
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .publications-panel {
+    padding: 12px;
+  }
+
+  .publications-list {
+    max-height: none;
+    overflow-y: visible;
+
+    gap: 12px;
+    padding-right: 0;
+  }
+
+  .publication-card {
+    flex-direction: column;
+    align-items: stretch;
+
+    gap: 12px;
+    padding: 12px 2px 16px;
+  }
+
+  .publication-image {
+    flex: none;
+    width: 100%;
+    max-width: 100%;
+
+    height: 180px;
+    min-height: 0;
+
+    img {
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  .publications-list .publication-title {
+    font-size: 1rem !important;
+  }
+}
+
+/* =========================================================
+   HONORS AND AWARDS
+   ========================================================= */
+
+.honors-section {
+  margin: 12px 0 28px;
+}
+
+/* Subsection headings */
+
+.honors-subheading {
+  margin: 22px 0 12px !important;
+
+  font-family: $sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #0B3046;
+}
+
+.honors-subheading:first-child {
+  margin-top: 0 !important;
+}
+
+/* Timeline */
+
+.honors-timeline {
+  display: flex;
+  flex-direction: column;
+}
+
+/* One year group */
+
+.honors-year-group {
+  display: grid;
+  grid-template-columns: 65px minmax(0, 1fr);
+  gap: 16px;
+
+  padding: 12px 0;
+
+  border-bottom: 1px solid #C9DDEC;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+/* Year */
+
+.honors-year {
+  padding-top: 2px;
+
+  font-family: $sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+
+  color: #5F84A2;
+}
+
+/* Entries within a year */
+
+.honors-items {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.honors-item {
+  min-width: 0;
+}
+
+/* Award or scholarship title */
+
+.honors-title {
+  margin-bottom: 3px;
+
+  font-family: $sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.4;
+
+  color: #0B3046;
+}
+
+/* Award title and date on the same line */
+
+.honors-item-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.honors-item-header .honors-title {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Organization and location */
+
+.honors-details {
+  font-family: $sans-serif;
+  font-size: 0.8rem;
+  font-weight: 400;
+  line-height: 1.5;
+
+  color: #494E52;
+}
+
+/* Mentor label */
+
+.honors-role {
+  font-weight: 500;
+  color: #5F84A2;
+}
+
+/* Dates */
+
+.honors-date {
+  flex-shrink: 0;
+  margin: 0;
+
+  font-family: $sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.4;
+  white-space: nowrap;
+
+  color: #5F84A2;
+}
+
+/* Mobile responsiveness */
+
+@media (max-width: 768px) {
+  .honors-year-group {
+    grid-template-columns: 48px minmax(0, 1fr);
+    gap: 10px;
+    padding: 10px 0;
+  }
+
+  .honors-year {
+    font-size: 0.8rem;
+  }
+
+  .honors-title {
+    font-size: 0.85rem;
+  }
+
+  .honors-details {
+    font-size: 0.78rem;
+  }
+
+  .honors-items {
+    gap: 12px;
+  }
+
+  .honors-item-header {
+    flex-wrap: wrap;
+    gap: 2px 8px;
+  }
+}

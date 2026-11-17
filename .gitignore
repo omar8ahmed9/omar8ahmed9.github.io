@@ -1,0 +1,13 @@
+_site/
+push.sh
+.DS_Store
+
+# Local development
+.bundle/
+.vscode/
+vendor/
+
+# Ruby and Jekyll
+.jekyll-cache/
+.jekyll-metadata
+.sass-cache/

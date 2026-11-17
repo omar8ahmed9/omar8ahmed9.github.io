@@ -1,0 +1,206 @@
+{% if page.author and site.data.authors[page.author] %}
+  {% assign author = site.data.authors[page.author] %}
+{% else %}
+  {% assign author = site.author %}
+{% endif %}
+
+<div itemscope itemtype="http://schema.org/Person" class="profile_box">
+
+  <!-- Profile photograph -->
+  <div class="author__avatar">
+    <img
+      src="{{ author.avatar }}"
+      class="author__avatar"
+      alt="{{ author.name }}"
+    >
+  </div>
+
+  <!-- Name and academic position -->
+  <div class="author__content">
+    <h3 class="author__name">{{ author.name }}</h3>
+
+    {% if author.bio %}
+      <p class="author__bio">{{ author.bio }}</p>
+    {% endif %}
+  </div>
+
+  <!-- Research interests, location and social profiles -->
+  <div class="author__urls-wrapper">
+
+    <ul class="author__urls social-icons">
+
+      <!-- Research interests -->
+      {% if site.description %}
+        <li class="author__interests">
+          {{ site.description }}
+        </li>
+      {% endif %}
+
+      <!-- Location -->
+      {% if author.location %}
+        <li class="author__location">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i>
+          <span>{{ author.location }}</span>
+        </li>
+      {% endif %}
+
+      <!-- Email -->
+      {% if author.email %}
+        <li>
+          <a href="mailto:{{ author.email }}">
+            <i class="fas fa-fw fa-envelope" aria-hidden="true"></i>
+            <span>Email</span>
+          </a>
+        </li>
+      {% endif %}
+
+      <!-- LinkedIn -->
+      {% if author.linkedin %}
+        <li>
+          <a
+            href="https://www.linkedin.com/in/{{ author.linkedin }}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i>
+            <span>LinkedIn</span>
+          </a>
+        </li>
+      {% endif %}
+
+      <!-- GitHub -->
+      {% if author.github %}
+        <li>
+          <a
+            href="https://github.com/{{ author.github }}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class="fab fa-fw fa-github" aria-hidden="true"></i>
+            <span>GitHub</span>
+          </a>
+        </li>
+      {% endif %}
+
+      <!-- Google Scholar -->
+      {% if author.googlescholar %}
+        <li>
+          <a
+            href="{{ author.googlescholar }}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class="fas fa-fw fa-graduation-cap" aria-hidden="true"></i>
+            <span>Google Scholar</span>
+          </a>
+        </li>
+      {% endif %}
+
+      <!-- ResearchGate -->
+      {% if author.researchgate %}
+        <li>
+          <a
+            href="{{ author.researchgate }}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              class="author__brand-icon"
+              src="{{ '/images/icons/researchgate.svg' | relative_url }}"
+              alt=""
+              aria-hidden="true"
+            >
+            <span>ResearchGate</span>
+          </a>
+        </li>
+      {% endif %}
+
+      <!-- ORCID -->
+      {% if author.orcid %}
+        <li>
+          <a
+            href="{{ author.orcid }}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              class="author__brand-icon"
+              src="{{ '/images/icons/orcid.svg' | relative_url }}"
+              alt=""
+              aria-hidden="true"
+            >
+            <span>ORCID</span>
+          </a>
+        </li>
+      {% endif %}
+
+    </ul>
+
+  </div>
+
+  <!-- Latest News -->
+  <div class="sidebar-news">
+
+    <h4>📰 News & Milestones</h4>
+
+    <div class="sidebar-news-scroll">
+
+      {% assign news_items = site.data.news | sort: "date" | reverse %}
+
+      {% for item in news_items %}
+
+        <div class="sidebar-news-item">
+
+          <!-- Date and optional links -->
+          <div class="sidebar-news-header">
+
+            <span class="sidebar-news-date">
+              {{ item.date | date: "%b %Y" | upcase }}
+            </span>
+
+            {% if item.linkedin or item.paper %}
+              <div class="sidebar-news-links">
+
+                {% if item.linkedin %}
+                  <a
+                    href="{{ item.linkedin }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="LinkedIn announcement: {{ item.title | escape }}"
+                    title="LinkedIn announcement"
+                  >
+                    <i class="fab fa-linkedin" aria-hidden="true"></i>
+                  </a>
+                {% endif %}
+
+                {% if item.paper %}
+                  <a
+                    href="{{ item.paper }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Read paper: {{ item.title | escape }}"
+                    title="Read paper"
+                  >
+                    <i class="fas fa-file-alt" aria-hidden="true"></i>
+                  </a>
+                {% endif %}
+
+              </div>
+            {% endif %}
+
+          </div>
+
+          <!-- Announcement -->
+          <p class="sidebar-news-title">
+            {{ item.title }}
+          </p>
+
+        </div>
+
+      {% endfor %}
+
+    </div>
+
+  </div>
+
+</div>

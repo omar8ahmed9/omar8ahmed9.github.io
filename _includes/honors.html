@@ -1,0 +1,106 @@
+<!-- =====================================================
+     Honors and Awards
+     ===================================================== -->
+
+<div class="honors-section">
+
+  <!-- Scholarships -->
+  <h3 class="honors-subheading">🎓 Scholarships</h3>
+
+  <div class="honors-timeline">
+
+    {% assign scholarship_groups = site.data.honors.scholarships | group_by: "year" %}
+
+    {% for group in scholarship_groups %}
+
+      <div class="honors-year-group">
+
+        <div class="honors-year">
+          {{ group.name }}
+        </div>
+
+        <div class="honors-items">
+
+          {% for item in group.items %}
+
+            <div class="honors-item">
+
+              <div class="honors-item-header">
+
+                <div class="honors-title">
+                  {{ item.title | escape }}
+                </div>
+
+                <span class="honors-date">
+                  {{ item.date | escape }}
+                </span>
+
+              </div>
+
+              <div class="honors-details">
+                {{ item.organization | escape }} · {{ item.location | escape }}
+              </div>
+
+            </div>
+
+          {% endfor %}
+
+        </div>
+
+      </div>
+
+    {% endfor %}
+
+  </div>
+
+
+  <!-- Selected Awards -->
+  <h3 class="honors-subheading">🏆 Selected Awards</h3>
+
+  <div class="honors-timeline">
+
+    {% assign award_groups = site.data.honors.awards | group_by: "year" %}
+
+    {% for group in award_groups %}
+
+      <div class="honors-year-group">
+
+        <div class="honors-year">
+          {{ group.name }}
+        </div>
+
+        <div class="honors-items">
+
+          {% for item in group.items %}
+
+            <div class="honors-item">
+
+              <div class="honors-item-header">
+
+                <div class="honors-title">
+                  {{ item.title | escape }}
+                </div>
+
+                <span class="honors-date">
+                  {% if item.role %}[{{ item.role | escape }} | {% endif %}{{ item.date | escape }}{% if item.role %}]{% endif %}
+                </span>
+
+              </div>
+
+              <div class="honors-details">
+                {{ item.organization | escape }} · {{ item.location | escape }}
+              </div>
+
+            </div>
+
+          {% endfor %}
+
+        </div>
+
+      </div>
+
+    {% endfor %}
+
+  </div>
+
+</div>

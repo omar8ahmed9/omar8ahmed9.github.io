@@ -1,0 +1,129 @@
+<!-- Publications -->
+<div class="publications-panel">
+
+  <div class="publications-list"
+       role="region"
+       aria-label="Publications list"
+       tabindex="0">
+
+  {% for paper in site.data.publications %}
+
+    <article class="publication-card">
+
+      <!-- Publication image and venue badge -->
+      <div class="publication-image">
+
+        <img
+          src="{{ paper.image | relative_url }}"
+          alt="{{ paper.title | escape }}"
+          loading="lazy"
+        >
+
+        <span class="publication-venue-badge">
+          {{ paper.venue_short | default: paper.venue | escape }} {{ paper.year }}
+        </span>
+
+      </div>
+
+      <!-- Publication information -->
+      <div class="publication-content">
+
+        <!-- Paper title -->
+        <h3 class="publication-title">
+          {% if paper.paper %}
+            <a
+              href="{{ paper.paper }}"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {{ paper.title | escape }}
+            </a>
+          {% else %}
+            {{ paper.title | escape }}
+          {% endif %}
+        </h3>
+
+        <!-- Authors -->
+        <p class="publication-authors">
+          {{ paper.authors }}
+        </p>
+
+        <!-- Venue and year -->
+        <p class="publication-venue">
+          {{ paper.venue | escape }} · {{ paper.year }}
+        </p>
+
+        <!-- Optional resource buttons -->
+        <div class="publication-links">
+
+          {% if paper.paper %}
+            <a
+              href="{{ paper.paper }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Read paper: {{ paper.title | escape }}"
+            >
+              <i class="fas fa-file-pdf" aria-hidden="true"></i>
+              <span>Paper</span>
+            </a>
+          {% endif %}
+
+          {% if paper.code %}
+            <a
+              href="{{ paper.code }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View code: {{ paper.title | escape }}"
+            >
+              <i class="fab fa-github" aria-hidden="true"></i>
+              <span>Code</span>
+            </a>
+          {% endif %}
+
+          {% if paper.project %}
+            <a
+              href="{{ paper.project }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View project: {{ paper.title | escape }}"
+            >
+              <i class="fas fa-globe" aria-hidden="true"></i>
+              <span>Project</span>
+            </a>
+          {% endif %}
+
+          {% if paper.video %}
+            <a
+              href="{{ paper.video }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Watch video: {{ paper.title | escape }}"
+            >
+              <i class="fas fa-play-circle" aria-hidden="true"></i>
+              <span>Video</span>
+            </a>
+          {% endif %}
+
+          {% if paper.bibtex %}
+            <a
+              href="{{ paper.bibtex }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View BibTeX: {{ paper.title | escape }}"
+            >
+              <i class="fas fa-quote-right" aria-hidden="true"></i>
+              <span>BibTeX</span>
+            </a>
+          {% endif %}
+
+        </div>
+
+      </div>
+
+    </article>
+
+  {% endfor %}
+
+  </div>
+
+</div>
