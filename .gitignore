@@ -5,7 +5,7 @@ push.sh
 # Local development
 .bundle/
 .vscode/
-vendor/
+/vendor/
 
 # Ruby and Jekyll
 .jekyll-cache/
