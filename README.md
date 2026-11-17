@@ -1,5 +1,3 @@
-\<div align="center">
-
 # Omar Abdelshafi Mohamed
 
 ### Personal Academic Website
@@ -8,9 +6,7 @@
 
 *Surgical Robotics · Robot Learning · Computer Vision*
 
-[**🌐 Visit My Website**](https://omar8ahmed9.github.io)
-
-\</div>
+🌐 **[Visit My Website](https://omar8ahmed9.github.io)**
 
 ---
 
@@ -22,13 +18,9 @@ The website is designed to provide a clean, responsive, and accessible overview 
 
 ## Website Preview
 
-\<div align="center">
+[![Preview of Omar Abdelshafi Mohamed's academic website](docs/website-preview.png)](https://omar8ahmed9.github.io)
 
-\<a href="[https://omar8ahmed9.github.io](https://omar8ahmed9.github.io)">   \<img src="docs/website-preview.png" alt="Preview of Omar Abdelshafi Mohamed's academic website" width="100%"> \</a>
-
-*Click the image to visit the live website.*
-
-\</div>
+*Click the screenshot to visit the live website.*
 
 ## Features
 
@@ -103,10 +95,6 @@ Third-party components remain subject to their respective licenses.
 
 ---
 
-\<div align="center">
-
 **© 2026 Omar Abdelshafi Mohamed — Personal Website Content**
 
 [Website](https://omar8ahmed9.github.io) · [GitHub](https://github.com/omar8ahmed9)
-
-\</div>
